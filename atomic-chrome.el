@@ -202,7 +202,10 @@ frame, depending on `atomic-chrome-buffer-open-style'."
       (switch-to-buffer buffer))
     (when edit-frame
       (raise-frame edit-frame)
-      (select-frame-set-input-focus edit-frame))
+      (run-at-time 0.1 nil
+                   (lambda (frame)
+                     (select-frame-set-input-focus frame))
+                   edit-frame))
     edit-frame))
 
 (defun atomic-chrome-create-buffer (socket url title text)
