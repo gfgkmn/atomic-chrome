@@ -200,8 +200,9 @@ frame, depending on `atomic-chrome-buffer-open-style'."
     (if (eq atomic-chrome-buffer-open-style 'split)
         (pop-to-buffer buffer)
       (switch-to-buffer buffer))
-    (raise-frame edit-frame)
-    (select-frame-set-input-focus (window-frame (selected-window)))
+    (when edit-frame
+      (raise-frame edit-frame)
+      (select-frame-set-input-focus edit-frame))
     edit-frame))
 
 (defun atomic-chrome-create-buffer (socket url title text)
